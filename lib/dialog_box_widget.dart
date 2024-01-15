@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 import 'constants_colors.dart';
 
 class FunkyOverlay extends StatefulWidget {
+  final String imgUrl;
+
+  const FunkyOverlay({
+    super.key,
+    required this.imgUrl,
+  });
   @override
   State<StatefulWidget> createState() => FunkyOverlayState();
 }
@@ -38,30 +44,47 @@ class FunkyOverlayState extends State<FunkyOverlay>
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 20),
             decoration: ShapeDecoration(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0))),
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0)),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(50.0),
               child: Wrap(
                 crossAxisAlignment: WrapCrossAlignment.center,
                 runAlignment: WrapAlignment.center,
+                alignment: WrapAlignment.center,
                 children: [
                   const Align(
                     alignment: Alignment.center,
                     child: Text(
                       "Play the Laser",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 25),
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height / 5,
+                      child: Image.asset(
+                        widget.imgUrl,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
                   Container(
                     child: GestureDetector(
-                      onLongPress: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => FunkyOverlay(),
-                        );
-                      },
+                      // onLongPress: () {
+                      //   showDialog(
+                      //     context: context,
+                      //     builder: (context) => FunkyOverlay(),
+                      //   );
+                      // },
                       onTap: () {
                         setState(() {
                           selected = true;
